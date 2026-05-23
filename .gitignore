@@ -1,0 +1,33 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Logs / temp
+*.log
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# WordPress core / environments
+wp-admin/
+wp-includes/
+wp-content/cache/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backups/
+
+# Keep only child theme in repository
+enigma/
