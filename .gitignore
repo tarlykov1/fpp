@@ -1,36 +1,47 @@
-# OS / editor
+# OS files
 .DS_Store
+.AppleDouble
+.LSOverride
 Thumbs.db
-*.swp
-*.swo
-.idea/
-.vscode/
-
-# Logs / temp
-*.log
-*.tmp
-*.temp
-*.bak
-*.old
+Desktop.ini
 
 # Archives
 *.zip
 *.tar
 *.tar.gz
 *.tgz
-*.7z
 *.rar
+*.7z
+*.gz
 
-# WordPress core / environments
-wp-admin/
-wp-includes/
-wp-content/cache/
+# Temp files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Cache
+.cache/
+*.cache
+
+# Dependencies
+node_modules/
+vendor/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# WordPress uploads
 wp-content/uploads/
-wp-content/upgrade/
-wp-content/backups/
+uploads/
 
-# Keep only child theme in repository
-enigma/
+# WordPress secrets/config
+wp-config.php
 
-# Deprecated child theme folder
-enigma-child-theme/
+# Parent theme safeguard
+generatepress/
+wp-content/themes/generatepress/

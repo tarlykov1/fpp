@@ -1,9 +1,11 @@
-# Enigma Child Theme
+# GeneratePress Child
 
-Этот репозиторий содержит только файлы дочерней темы **Enigma Child** для WordPress.
+This repository contains a child theme for GeneratePress.
 
-## Важно
+## Notes
 
-- Это дочерняя тема для `enigma`.
-- Родительская тема `enigma` должна быть установлена отдельно.
-- Репозиторий содержит только изменения/файлы дочерней темы, без копирования родительской темы целиком.
+- The parent theme **GeneratePress** must be installed separately in WordPress.
+- This repository contains only child-theme files.
+- Old Enigma-related files were removed from this repository.
+- Add custom styles in `style.css`.
+- Add custom PHP logic in `functions.php`.
