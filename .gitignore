@@ -31,3 +31,6 @@ wp-content/backups/
 
 # Keep only child theme in repository
 enigma/
+
+# Deprecated child theme folder
+enigma-child-theme/
