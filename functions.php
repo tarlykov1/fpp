@@ -1,119 +1,94 @@
 <?php
 /**
- * Enqueue parent and child theme styles.
- *
- * @package GeneratePress_Child
+ * GeneratePress Child functions.
  */
 
-add_action( 'wp_enqueue_scripts', 'generatepress_child_enqueue_styles' );
-
-/**
- * Enqueue stylesheets for the child theme.
- */
-function generatepress_child_enqueue_styles() {
-	wp_enqueue_style(
-		'generatepress-parent',
-		get_template_directory_uri() . '/style.css'
-	);
-
-	wp_enqueue_style(
-		'generatepress-child',
-		get_stylesheet_directory_uri() . '/style.css',
-		array( 'generatepress-parent' ),
-		wp_get_theme()->get( 'Version' )
-	);
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
- * Remove the default "Built with GeneratePress" footer credit.
- *
- * @param string $copyright Footer copyright HTML.
- * @return string
+ * Marker to check that child theme functions.php is loaded.
  */
-function generatepress_child_remove_generatepress_credit( $copyright ) {
-	$updated = preg_replace(
-		'#\s*(?:•|&middot;|&#183;)\s*Built with\s*<a[^>]*generatepress\.com[^>]*>.*?</a>#iu',
-		'',
-		$copyright
+add_action( 'wp_footer', function () {
+	echo "\n<!-- FPP_CHILD_THEME_FUNCTIONS_LOADED -->\n";
+}, 9999 );
+
+/**
+ * Replace GeneratePress footer copyright completely.
+ * This keeps the site name and removes "Built with GeneratePress".
+ */
+add_filter( 'generate_copyright', function () {
+	return sprintf(
+		'&copy; %1$s %2$s',
+		esc_html( date_i18n( 'Y' ) ),
+		esc_html( get_bloginfo( 'name' ) )
 	);
-
-	if ( null === $updated ) {
-		return $copyright;
-	}
-
-	return trim( $updated );
-}
-add_filter( 'generate_copyright', 'generatepress_child_remove_generatepress_credit' );
+}, 999 );
 
 /**
- * Hide post author meta in GeneratePress entries.
+ * Remove author and comments link from GeneratePress entry meta.
  */
-add_filter( 'generate_post_author', '__return_false' );
+add_filter( 'generate_header_entry_meta_items', function ( $items ) {
+	$items = array_diff( $items, array( 'author', 'comments-link' ) );
+	return array_values( $items );
+}, 999 );
+
+add_filter( 'generate_footer_entry_meta_items', function ( $items ) {
+	$items = array_diff( $items, array( 'author', 'comments-link' ) );
+	return array_values( $items );
+}, 999 );
 
 /**
- * Hide post comments link in GeneratePress entries.
+ * Replace GeneratePress excerpt "Read more" link.
  */
-add_filter( 'generate_post_comment', '__return_false' );
+add_filter( 'generate_excerpt_more_output', function () {
+	return sprintf(
+		' ... <a title="%1$s" class="read-more" href="%2$s" aria-label="%3$s">%4$s</a>',
+		esc_attr( the_title_attribute( array( 'echo' => false ) ) ),
+		esc_url( get_permalink( get_the_ID() ) ),
+		esc_attr( sprintf( 'Читать далее: %s', get_the_title( get_the_ID() ) ) ),
+		esc_html( 'Читать далее...' )
+	);
+}, 999 );
 
 /**
- * Replace excerpt "read more" text with Russian text.
- *
- * @param string $more Excerpt trailing text.
- * @return string
+ * Fallback for default WordPress excerpt ending.
  */
-function generatepress_child_excerpt_more( $more ) {
-	return ' … Читать далее...';
-}
-add_filter( 'excerpt_more', 'generatepress_child_excerpt_more' );
+add_filter( 'excerpt_more', function () {
+	return ' ...';
+}, 999 );
 
 /**
- * Localize common frontend strings (pagination and post meta).
- *
- * @param string $translated Translated text.
- * @param string $text       Original text.
- * @param string $domain     Text domain.
- * @return string
+ * Translate GeneratePress archive pagination.
  */
-function generatepress_child_localize_frontend_strings( $translated, $text, $domain ) {
-	if ( 'generatepress' !== $domain && 'default' !== $domain ) {
-		return $translated;
-	}
+add_filter( 'generate_previous_link_text', function () {
+	return '← Назад';
+}, 999 );
 
-	$map = array(
-		'Next →'          => 'Следующая →',
-		'Next &rarr;'      => 'Следующая →',
-		'Next &#8594;'     => 'Следующая →',
-		'← Previous'      => '← Предыдущая',
-		'&larr; Previous'  => '← Предыдущая',
-		'&#8592; Previous' => '← Предыдущая',
-		'Next'            => 'Следующая',
-		'Previous'        => 'Предыдущая',
-		'Leave a comment' => '',
+add_filter( 'generate_next_link_text', function () {
+	return 'Далее →';
+}, 999 );
+
+/**
+ * Extra fallback for translated strings if theme outputs them directly.
+ */
+add_filter( 'gettext', function ( $translated, $text, $domain ) {
+	$replacements = array(
+		'Next'            => 'Далее',
+		'Next →'          => 'Далее →',
+		'Next &rarr;'     => 'Далее →',
+		'Previous'        => 'Назад',
+		'← Previous'      => '← Назад',
+		'&larr; Previous' => '← Назад',
 		'Read more'       => 'Читать далее...',
+		'Leave a comment' => '',
+		'Leave a Comment' => '',
 	);
 
-	if ( isset( $map[ $text ] ) ) {
-		return $map[ $text ];
-	}
-
-	if ( preg_match( '/^Leave a Comment(?: on .+)?$/i', $text ) ) {
-		return '';
+	if ( isset( $replacements[ $text ] ) ) {
+		return $replacements[ $text ];
 	}
 
 	return $translated;
-}
-add_filter( 'gettext', 'generatepress_child_localize_frontend_strings', 20, 3 );
-
-/**
- * Force Russian pagination labels for archive links.
- *
- * @param array<string,mixed> $args Pagination arguments.
- * @return array<string,mixed>
- */
-function generatepress_child_localize_pagination_args( $args ) {
-	$args['next_text'] = 'Следующая →';
-	$args['prev_text'] = '← Предыдущая';
-
-	return $args;
-}
-add_filter( 'paginate_links_args', 'generatepress_child_localize_pagination_args' );
+}, 999, 3 );
