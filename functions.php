@@ -38,3 +38,58 @@ function generatepress_child_remove_generatepress_credit( $copyright ) {
 	);
 }
 add_filter( 'generate_copyright', 'generatepress_child_remove_generatepress_credit' );
+
+/**
+ * Hide post author meta in GeneratePress entries.
+ */
+add_filter( 'generate_post_author', '__return_false' );
+
+/**
+ * Hide post comments link in GeneratePress entries.
+ */
+add_filter( 'generate_post_comment', '__return_false' );
+
+/**
+ * Replace excerpt "read more" text with Russian text.
+ *
+ * @param string $more Excerpt trailing text.
+ * @return string
+ */
+function generatepress_child_excerpt_more( $more ) {
+	return ' … Читать далее...';
+}
+add_filter( 'excerpt_more', 'generatepress_child_excerpt_more' );
+
+/**
+ * Localize common frontend strings (pagination and post meta).
+ *
+ * @param string $translated Translated text.
+ * @param string $text       Original text.
+ * @param string $domain     Text domain.
+ * @return string
+ */
+function generatepress_child_localize_frontend_strings( $translated, $text, $domain ) {
+	if ( 'generatepress' !== $domain && 'default' !== $domain ) {
+		return $translated;
+	}
+
+	$map = array(
+		'Next →'          => 'Следующая →',
+		'← Previous'      => '← Предыдущая',
+		'Next'            => 'Следующая',
+		'Previous'        => 'Предыдущая',
+		'Leave a comment' => '',
+		'Read more'       => 'Читать далее...',
+	);
+
+	if ( isset( $map[ $text ] ) ) {
+		return $map[ $text ];
+	}
+
+	if ( preg_match( '/^Leave a Comment(?: on .+)?$/i', $text ) ) {
+		return '';
+	}
+
+	return $translated;
+}
+add_filter( 'gettext', 'generatepress_child_localize_frontend_strings', 20, 3 );
