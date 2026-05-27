@@ -7,6 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_stylesheet_directory() . '/includes/fruitful-shortcodes-compat.php';
+
 /**
  * Marker to check that child theme functions.php is loaded.
  */
