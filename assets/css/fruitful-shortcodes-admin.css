@@ -1,6 +1,1 @@
-.fpp-custom-shortcodes-table code{white-space:normal}
-.fpp-status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:12px}
-.fpp-status-on{background:#dff5e4;color:#176b2c}
-.fpp-status-off{background:#fde3e3;color:#8a1f1f}
-.fpp-usage-example{margin-top:12px;padding:10px;border:1px solid #dcdcde;background:#fff}
-.fpp-usage-example code{display:block;margin-top:4px}
+.fpp-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}.fpp-card{background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:12px}.fpp-card strong{display:block;margin-bottom:6px}.fpp-empty{background:#fff;border:1px solid #dcdcde;border-left:4px solid #2271b1;border-radius:8px;padding:16px;margin:12px 0}.fpp-empty pre{background:#f6f7f7;padding:10px;border-radius:6px;overflow:auto}.widefat code{white-space:normal}.widefat td,.widefat th{vertical-align:top}.button{margin-right:6px}
