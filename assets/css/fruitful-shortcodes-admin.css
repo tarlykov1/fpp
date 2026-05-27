@@ -1,0 +1,6 @@
+.fpp-custom-shortcodes-table code{white-space:normal}
+.fpp-status{display:inline-block;padding:2px 8px;border-radius:12px;font-size:12px}
+.fpp-status-on{background:#dff5e4;color:#176b2c}
+.fpp-status-off{background:#fde3e3;color:#8a1f1f}
+.fpp-usage-example{margin-top:12px;padding:10px;border:1px solid #dcdcde;background:#fff}
+.fpp-usage-example code{display:block;margin-top:4px}

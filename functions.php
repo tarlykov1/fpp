@@ -8,6 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once get_stylesheet_directory() . '/includes/fruitful-shortcodes-compat.php';
+require_once get_stylesheet_directory() . '/includes/fruitful-shortcodes-admin.php';
+require_once get_stylesheet_directory() . '/includes/custom-shortcodes-admin.php';
+require_once get_stylesheet_directory() . '/includes/custom-shortcodes-runtime.php';
 
 /**
  * Marker to check that child theme functions.php is loaded.
