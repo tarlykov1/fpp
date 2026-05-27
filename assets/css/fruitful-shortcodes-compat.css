@@ -1,0 +1,20 @@
+.fpp-fruitful-dbox{padding:1rem 1.25rem;border:1px solid #d7dde5;border-radius:.5rem;background:#f8fafc;margin:0 0 1rem}
+.fpp-fruitful-dbox a{display:inline-block;margin:.25rem 0;color:inherit}
+.fpp-fruitful-sep{border-top:1px solid #e1e5ea;margin:1rem 0}
+.fpp-fruitful-alert{padding:.875rem 1rem;border-radius:.4rem;margin:0 0 1rem;border:1px solid transparent}
+.fpp-fruitful-alert-success{background:#ecfdf3;border-color:#b7ebc9}
+.fpp-fruitful-alert-info{background:#eff6ff;border-color:#bfdbfe}
+.fpp-fruitful-alert-warning{background:#fff7ed;border-color:#fed7aa}
+.fpp-fruitful-alert-danger{background:#fef2f2;border-color:#fecaca}
+.fpp-fruitful-btn{display:inline-flex;gap:.4rem;align-items:center;text-decoration:none;padding:.6rem 1rem;border-radius:.4rem;border:1px solid #c6ccd5;background:#f1f5f9;color:#1f2937}
+.fpp-fruitful-btn-size-lg{font-size:1.05rem}.fpp-fruitful-btn-size-sm{font-size:.85rem}
+.fpp-fruitful-pbar{margin:0 0 1rem}.fpp-fruitful-bar{display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:center;margin:.5rem 0}
+.fpp-fruitful-bar-track{grid-column:1 / span 1;height:.5rem;background:#e5e7eb;border-radius:999px;overflow:hidden}
+.fpp-fruitful-bar-fill{display:block;height:100%;background:#3b82f6}
+.fpp-fruitful-tabs{display:grid;gap:.75rem;margin:0 0 1rem}.fpp-fruitful-tab{padding:.75rem;border:1px solid #e5e7eb;border-radius:.4rem}
+.fpp-fruitful-ibox-row,.fpp-fruitful-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.fpp-fruitful-ibox,.fpp-fruitful-post-card{border:1px solid #e5e7eb;border-radius:.45rem;padding:.9rem;background:#fff}
+.fpp-fruitful-post-thumb{display:block;width:100%;height:auto;border-radius:.3rem;margin-bottom:.5rem}
+.fpp-fruitful-post-title{font-size:1rem;margin:.3rem 0}.fpp-fruitful-post-date{display:block;color:#6b7280;font-size:.85rem;margin-bottom:.5rem}
+.fpp-fruitful-post-excerpt{margin-bottom:.6rem}.fpp-fruitful-post-readmore{text-decoration:none}
+.fpp-fruitful-posts-slider-fallback{overflow-x:auto;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr)}
